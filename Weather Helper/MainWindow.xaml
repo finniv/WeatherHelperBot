@@ -1,0 +1,61 @@
+﻿<Window 
+    x:Name="WeatherHelperServer" x:Class="Weather_Helper.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Weather_Helper"
+        mc:Ignorable="d"
+        Title="WeatherHelperServer" Height="250" Width="430" Loaded="MainWindow1_Loaded" MinWidth="430" MinHeight="250" MaxWidth="430" MaxHeight="250">
+    <Window.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="Grid.Background" Value="#eef5fd"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#eef5fd"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition />
+            <RowDefinition Height="0"/>
+        </Grid.RowDefinitions>
+        <StackPanel 
+            Grid.Column="0">
+            <Image x:Name="Img" Width="110" Height="90" HorizontalAlignment="Center" Margin="-15,0,55,0"/>
+            <TextBox x:Name="TempText"  TextWrapping="Wrap"
+                 FontSize="30" Text="Loading..." TextAlignment="Center" 
+                     Height="50" Width="165" 
+                     Margin="0,0,0,48"
+                 />
+        </StackPanel>
+        <ToolBarTray Grid.Column="1">
+            <ToolBar Height="25" VerticalAlignment="Top" Margin="0,0,-84,0">
+                <ToggleButton x:Name="TelegramSend" Click="TelegramSend_Click">
+                    <Image Source="E:\Users\vechi\Documents\Visual Studio 2017\Projects\My Projects\Weather Helper\img\Bokehlicia-Captiva-Web-telegram.ico" />
+                </ToggleButton>
+                <Separator />
+                <ComboBox x:Name="CityName" Foreground="Gray"  Width="100" IsReadOnly="True" SelectedIndex="0">
+                    <ComboBoxItem Content="Харьков"/>
+                    <ComboBoxItem Content="Киев"/>
+                    <ComboBoxItem Content="Донецк"/>
+                    <ComboBoxItem Content="Львов"/>
+                    <ComboBoxItem Content="Житомир"/>
+                    <ComboBoxItem Content="Полтава"/>
+                </ComboBox>
+                <Separator />
+                <Button x:Name="CityButton" Width="100" Height="25" Click="CityButton_Click">
+                    Выбрать город
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        <Button Content="Отправить" x:Name="SendMessageButton" Grid.Column="1" HorizontalAlignment="Left" Margin="155,50,0,0" VerticalAlignment="Top" Width="75" Height="30" Click="SendMessageButton_Click"/>
+        <TextBox Grid.Column="1" x:Name="IDChatBox" HorizontalAlignment="Left" Height="20" Margin="15,30,0,0" TextWrapping="Wrap" Text="ID чата" VerticalAlignment="Top" Width="120"/>
+        <TextBox Grid.Column="1" x:Name="SendMessageBox" HorizontalAlignment="Left" Height="23" Margin="15,57,0,0" TextWrapping="Wrap" Text="Введите сообщение" VerticalAlignment="Top" Width="120"/>
+    </Grid>
+</Window>
