@@ -13,27 +13,27 @@ namespace Weather_Helper
     /// </summary>
     /// 706483 Харків ІД для openweathermap
     /// https://api.telegram.org/bot398650303:AAEIAmvLtXF70UK1HE_r9X7YePn3Q-bXLl0/getUpdates запит для отримання ID користувача
+
     public partial class AdminWindow : Window
     {
         WeatherGet wget = new WeatherGet();
         BotCoreWH bcwh = new BotCoreWH();
+        private string appID = "3e99f3f48abcb686f41634b539bbf59e";
+        public string AppID { get => appID; set => appID = value; }
+        //Таймер для автообновления погоды
+        DispatcherTimer AutoUpd = new DispatcherTimer() { Interval = TimeSpan.FromMinutes(10) };
+
         public AdminWindow()
         {
             InitializeComponent();
             AutoUpd.Tick += Refresh;
             AutoUpd.Start();
         }
-        //Таймер для автообновления погоды
-        DispatcherTimer AutoUpd = new DispatcherTimer() { Interval = TimeSpan.FromMinutes(10) };
-
-        private string appID = "3e99f3f48abcb686f41634b539bbf59e";//ID доступа к API
-
-        public string AppID { get => appID; set => appID = value; }
+        
         private async void Refresh(object sender, object e)//Асинхонный метод для работы с запросами
         {
             var WeatherClient = new HttpClient();//Http слушатель
             string WeatherResponse = null;
-
             try
             {
                 WeatherResponse = await WeatherClient.GetStringAsync("http://api.openweathermap.org/data/2.5/weather?q=" + wget.ChosenCity1 + "&mode=json&units=metric&appid=" + AppID);/*WEB-Запрос ,результатом которого является JSON*/
@@ -46,17 +46,13 @@ namespace Weather_Helper
             try
             {
                 dynamic x = JsonConvert.DeserializeObject(WeatherResponse);
-                /*Динамичесґкая переменная,которая позволяет работать с данными ,
-                которые отсутствуют на момент компиляции
-                NewtonSoft библиотека для десериализации Json*/
 
                 TempText.Text = $"{x.main.temp}" + "C°";
-                BitmapImage img = new BitmapImage(new Uri($"http://openweathermap.org/img/w/{x.weather[0].icon}.png"));/*Получение картинки соответствующей текущей погоде*/
+                BitmapImage img = new BitmapImage(new Uri($"http://openweathermap.org/img/w/{x.weather[0].icon}.png"));
                 Img.Source = img;
             }
-            catch(Exception ex)
+            catch
             {
-                //MessageBox.Show(ex.Message.ToString());
                 MainWindow1_Loaded(sender, null);
             }
         }
@@ -67,13 +63,13 @@ namespace Weather_Helper
             bcwh.LoadForm();
             Refresh(sender, null);
         }
-        
-        private async void TelegramSend_Click(object sender, RoutedEventArgs e)/*Метод,который позволяет отправлять сообщение с текущей температурой за окном на указанный ID*/
+
+        /*Метод,который позволяет отправлять сообщение с текущей температурой за окном на указанный ID*/
+        private async void TelegramSend_Click(object sender, RoutedEventArgs e)
         {
-            
             var bot = new TelegramBotClient(bcwh._BotToken);/*Токен для доступа к боту*/
             
-            var s = await bot.SendTextMessageAsync(bcwh._ChatKeyID, "Сейчас на улице в городе  "+CityName.Text +" " + TempText.Text);/*Инструкция на отправку сообщения на мой id*/
+            var s = await bot.SendTextMessageAsync(bcwh._ChatKeyID, "Сейчас на улице в городе  "+CityName.Text +" " + TempText.Text);
         }
 
         private void CityButton_Click(object sender, RoutedEventArgs e)
@@ -117,14 +113,20 @@ namespace Weather_Helper
             try
             {
                 var bot = new TelegramBotClient(bcwh._BotToken);
-
                 var send = await bot.SendTextMessageAsync(ChatId, ChatMesage);
+                MessageBox.Show("Отправлено");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
             }
           
+        }
+
+        private void StatButton_Click(object sender, RoutedEventArgs e)
+        {
+            WindowStat winst = new WindowStat();
+            winst.Show();
         }
     }
 }
