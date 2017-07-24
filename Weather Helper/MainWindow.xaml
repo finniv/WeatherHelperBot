@@ -37,7 +37,7 @@
         <ToolBarTray Grid.Column="1">
             <ToolBar Height="25" VerticalAlignment="Top" Margin="0,0,-84,0">
                 <ToggleButton x:Name="TelegramSend" Click="TelegramSend_Click">
-                    <Image Source="E:\Users\vechi\Documents\Visual Studio 2017\Projects\My Projects\Weather Helper\img\Bokehlicia-Captiva-Web-telegram.ico" />
+                    <Image Source="C:\Users\Анна\Desktop\WeatherHelperBot-master\Weather Helper\img\Bokehlicia-Captiva-Web-telegram.ico" />
                 </ToggleButton>
                 <Separator />
                 <ComboBox x:Name="CityName" Foreground="Gray"  Width="100" IsReadOnly="True" SelectedIndex="0">
@@ -55,6 +55,7 @@
             </ToolBar>
         </ToolBarTray>
         <Button Content="Отправить" x:Name="SendMessageButton" Grid.Column="1" HorizontalAlignment="Left" Margin="155,50,0,0" VerticalAlignment="Top" Width="75" Height="30" Click="SendMessageButton_Click"/>
+        <Button Content="Статистика" x:Name="StatButton" Grid.Column="1" HorizontalAlignment="Left" Margin="155,100,0,0" VerticalAlignment="Top" Width="75" Height="30" Click="StatButton_Click"/>
         <TextBox Grid.Column="1" x:Name="IDChatBox" HorizontalAlignment="Left" Height="20" Margin="15,30,0,0" TextWrapping="Wrap" Text="ID чата" VerticalAlignment="Top" Width="120"/>
         <TextBox Grid.Column="1" x:Name="SendMessageBox" HorizontalAlignment="Left" Height="23" Margin="15,57,0,0" TextWrapping="Wrap" Text="Введите сообщение" VerticalAlignment="Top" Width="120"/>
     </Grid>

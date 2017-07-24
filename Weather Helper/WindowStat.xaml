@@ -1,0 +1,19 @@
+﻿<Window x:Class="Weather_Helper.WindowStat"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Weather_Helper"
+        mc:Ignorable="d"
+        Title="WindowStat" Height="204.255" Width="425.82">
+    <Grid>
+        <DataGrid AutoGenerateColumns="False"  Name="dataGridUsers" DockPanel.Dock ="Top">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Width="100" x:Name="columnID" />
+                <DataGridTextColumn Header="FirstName" Width="100" x:Name="columnFirstName" />
+                <DataGridTextColumn Header="LastName" Width="100" x:Name="columnLastName" />
+                <DataGridTextColumn Header="Username" Width="100" x:Name="columnUsername" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
